@@ -48,6 +48,13 @@ Newer touch releases can schedule a fresh attempt. A closed, hidden, or minimize
 original window is not activated. This restores the foreground app, not the specific
 text field when touching two controls inside the same app.
 
+A widget button that brings another app (such as a media player) forward leaves
+that app in front. Native touch uses the release hit-test or a target observed
+during contact; it does not assume that every newly foregrounded app was touched.
+If a swiped panel moves away, a captured target can identify another panel in the
+same process. Without that evidence, restoration is skipped when the release
+hit-test and foreground disagree.
+
 The focus-restoration worker captures the native editor control as well as its parent window.
 Its worker briefly connects the relevant input queues with `AttachThreadInput`,
 calls `SetForegroundWindow` and `SetFocus`, verifies the focus, and detaches on every
